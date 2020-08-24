@@ -236,6 +236,11 @@ func add(args *skel.CmdArgs, cniTypes typeswrapper.CNITYPES, grpcClient grpcwrap
 
 	result := &current.Result{
 		IPs: ips,
+		Interfaces: []*current.Interface{
+			{
+				Name: hostVethName,
+			},
+		},
 	}
 
 	return cniTypes.PrintResult(result, conf.CNIVersion)
