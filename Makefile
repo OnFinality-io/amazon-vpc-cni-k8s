@@ -26,8 +26,8 @@ VERSION = $(shell git describe --tags --always --dirty || echo "unknown")
 DESTDIR = .
 
 # IMAGE is the primary AWS VPC CNI plugin container image.
-IMAGE = amazon/amazon-k8s-cni
-IMAGE_NAME = $(IMAGE)$(IMAGE_ARCH_SUFFIX):$(VERSION)
+IMAGE = onfinality/amazon-k8s-cni
+IMAGE_NAME = $(IMAGE)$(IMAGE_ARCH_SUFFIX):$(VERSION)-fix
 IMAGE_DIST = $(DESTDIR)/$(subst /,_,$(IMAGE_NAME)).tar.gz
 # METRICS_IMAGE is the CNI metrics publisher sidecar container image.
 METRICS_IMAGE = amazon/cni-metrics-helper
