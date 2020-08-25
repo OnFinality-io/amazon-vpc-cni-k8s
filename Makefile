@@ -75,10 +75,11 @@ DOCKER_ARGS =
 DOCKER_RUN_FLAGS = --rm -ti $(DOCKER_ARGS)
 # DOCKER_BUILD_FLAGS is the set of flags passed during container image builds
 # based on the requested build.
+#					  --network=host \
+
 DOCKER_BUILD_FLAGS = --build-arg GOARCH="$(ARCH)" \
 					  --build-arg docker_arch="$(DOCKER_ARCH)" \
 					  --build-arg golang_image="$(GOLANG_IMAGE)" \
-					  --network=host \
 	  		          $(DOCKER_ARGS)
 
 # Default to building an executable using the host's Go toolchain.
