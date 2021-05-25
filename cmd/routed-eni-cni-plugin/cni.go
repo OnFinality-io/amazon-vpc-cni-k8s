@@ -181,15 +181,17 @@ func add(args *skel.CmdArgs, cniTypes typeswrapper.CNITYPES, grpcClient grpcwrap
 		Mask: net.IPv4Mask(255, 255, 255, 255),
 	}
 
+	var hostVethName string
+
 	if r.PodVlanId != 0 {
-		hostVethName := generateHostVethName("vlan", string(k8sArgs.K8S_POD_NAMESPACE), string(k8sArgs.K8S_POD_NAME))
+		hostVethName = generateHostVethName("vlan", string(k8sArgs.K8S_POD_NAMESPACE), string(k8sArgs.K8S_POD_NAME))
 
 		err = driverClient.SetupPodENINetwork(hostVethName, args.IfName, args.Netns, addr, int(r.PodVlanId), r.PodENIMAC,
 			r.PodENISubnetGW, int(r.ParentIfIndex), mtu, log)
 	} else {
 		// build hostVethName
 		// Note: the maximum length for linux interface name is 15
-		hostVethName := generateHostVethName(conf.VethPrefix, string(k8sArgs.K8S_POD_NAMESPACE), string(k8sArgs.K8S_POD_NAME))
+		hostVethName = generateHostVethName(conf.VethPrefix, string(k8sArgs.K8S_POD_NAMESPACE), string(k8sArgs.K8S_POD_NAME))
 
 		err = driverClient.SetupNS(hostVethName, args.IfName, args.Netns, addr, int(r.DeviceNumber), r.VPCcidrs, r.UseExternalSNAT, mtu, log)
 	}
