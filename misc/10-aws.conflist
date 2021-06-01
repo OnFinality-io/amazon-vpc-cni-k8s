@@ -14,7 +14,7 @@
       "type": "portmap",
       "capabilities": {"portMappings": true},
       "snat": true
-    }
+    },
     {
       "type": "bandwidth",
       "capabilities": {"bandwidth": true}
